@@ -67,7 +67,7 @@ public class MovieRunnerSimilarRatings {
     
     public static void printSimilarRatings() {
         FourthRatings fourth = new FourthRatings();
-        ArrayList<Rating> ratings = fourth.getSimilarRatings("65", 20, 5);
+        ArrayList<Rating> ratings = fourth.getSimilarRatings("71", 20, 5);
         for (Rating rating : ratings) {
             System.out.println(rating.getValue()+"\t"+MovieDatabase.getTitle(rating.getItem()));
         }
@@ -81,7 +81,7 @@ public class MovieRunnerSimilarRatings {
      */
     public static void printSimilarRatingsByGenre(){
         FourthRatings fourth = new FourthRatings();
-        ArrayList<Rating> ratings = fourth.getSimilarRatingsByFilter("65", 20, 5, new GenreFilter("Action"));
+        ArrayList<Rating> ratings = fourth.getSimilarRatingsByFilter("964", 20, 5, new GenreFilter("Mystery"));
         for (Rating rating : ratings) {
             System.out.println(rating.getValue()+"\t"+MovieDatabase.getTitle(rating.getItem()));
         }
@@ -98,7 +98,48 @@ public class MovieRunnerSimilarRatings {
      */
     public static void printSimilarRatingsByDirector() {
         FourthRatings fourth = new FourthRatings();
-        ArrayList<Rating> ratings = fourth.getSimilarRatingsByFilter("1034", 10, 3, new DirectorsFilter("Clint Eastwood,Sydney Pollack,David Cronenberg,Oliver Stone"));
+        ArrayList<Rating> ratings = fourth.getSimilarRatingsByFilter("120", 10, 2, new DirectorsFilter("Clint Eastwood,J.J. Abrams,Alfred Hitchcock,Sydney Pollack,David Cronenberg,Oliver Stone,Mike Leigh"));
+        for (Rating rating : ratings) {
+            System.out.println(rating.getValue()+"\t"+MovieDatabase.getTitle(rating.getItem()));
+        }
+    }
+    
+    /**
+     * Write a void method printSimilarRatingsByGenreAndMinutes
+     * that has no parameters. This method is similar to
+     * printSimilarRatings but also uses a genre filter
+     * and a minutes filter and then lists recommended
+     * movies and their similarity ratings,
+     * and for each movie prints the movie, its minutes,
+     * and its similarity rating on one line and its genres
+     * on a separate line below it. 
+     */
+    public static void printSimilarRatingsByGenreAndMinutes(){
+        FourthRatings fourth = new FourthRatings();
+        AllFilters allFilters = new AllFilters();
+        allFilters.addFilter(new GenreFilter("Drama"));
+        allFilters.addFilter(new MinutesFilter(80, 160));
+        ArrayList<Rating> ratings = fourth.getSimilarRatingsByFilter("168", 10, 3, allFilters);
+        for (Rating rating : ratings) {
+            System.out.println(rating.getValue()+"\t"+MovieDatabase.getTitle(rating.getItem()));
+        }
+    }
+    
+    /**
+     * Write a void method printSimilarRatingsByYearAfterAndMinutes
+     * that has no parameters. This method is similar to
+     * printSimilarRatings but also uses a year-after filter
+     * and a minutes filter and then lists recommended movies
+     * and their similarity ratings, and for each movie prints
+     * the movie, its year, its minutes, and its similarity
+     * rating on one line.
+     */
+    public static void printSimilarRatingsByYearAfterAndMinutes() {
+        FourthRatings fourth = new FourthRatings();
+        AllFilters allFilters = new AllFilters();
+        allFilters.addFilter(new YearAfterFilter(1975));
+        allFilters.addFilter(new MinutesFilter(70, 200));
+        ArrayList<Rating> ratings = fourth.getSimilarRatingsByFilter("314", 10, 5, allFilters);
         for (Rating rating : ratings) {
             System.out.println(rating.getValue()+"\t"+MovieDatabase.getTitle(rating.getItem()));
         }
